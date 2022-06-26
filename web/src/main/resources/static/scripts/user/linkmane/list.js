@@ -104,9 +104,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
                 content: web.rootPath() + 'linkmane/add.html'
             });
         }
-        if (obj.event == 'export'){
+        // 判断当前执行的是不是导出操作
+        if (obj.event === 'export') {
             var eix;
-            var url = web.rootPath()+'linkmane/export'
+            var url = web.rootPath() + 'linkmane/export'
             $.fileDownload(url, {
                 httpMethod: 'POST',
                 prepareCallback: function (url) {

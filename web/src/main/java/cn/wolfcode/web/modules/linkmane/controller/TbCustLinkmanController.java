@@ -159,26 +159,27 @@ public class TbCustLinkmanController extends BaseController {
         return ResponseEntity.ok(ApiModel.ok());
     }
 
-    @SysLog(value = LogModules.EXPORT, module = LogModules.DICT)
+    @SysLog(value = LogModules.EXPORT, module = LogModule)
     @PostMapping("export")
-//    @PreAuthorize("hasAuthority('linkmane:export')")
     public void export(HttpServletResponse response, String parameterName, String custId) throws IOException {
-        //根据条件查询到数据
-        List<TbCustLinkman> list = entityService.lambdaQuery()
+        // 根据条件查询到数据
+        List<TbCustLinkman> list = entityService
+                .lambdaQuery()
                 .eq(StringUtils.isNotBlank(custId), TbCustLinkman::getCustId, custId)
-//                .and(StringUtils.isNotBlank(parameterName),q ->
-//                        q.like(TbCustLinkman::getLinkman, parameterName)
-//                                .or()
-//                                .like(TbCustLinkman::getPhone, parameterName)
-                .like(StringUtils.isNotBlank(parameterName),TbCustLinkman::getLinkman,parameterName)
-                .or()
-                .like(StringUtils.isNotBlank(parameterName),TbCustLinkman::getPhone,parameterName
-                ).list();
-        //执行文件导出
+                .and(StringUtils.isNotBlank(parameterName), q ->
+                        q.like(TbCustLinkman::getLinkman, parameterName)
+                                .or()
+                                .like(TbCustLinkman::getPhone, parameterName)
+                )
+                .list();
+        log.debug("擅自的哦积分"+custId);
+
+        // 执行文件导出
         ExportParams exportParams = new ExportParams();
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, TbCustLinkman.class, list);
         PoiExportHelper.exportExcel(response, "客户联系人列表", workbook);
     }
+
     @RequestMapping("listByCustomerId")
     public ResponseEntity<ApiModel> listByCustomerId(String custId){
         //没有传递客户的情况，直接返回空的数据

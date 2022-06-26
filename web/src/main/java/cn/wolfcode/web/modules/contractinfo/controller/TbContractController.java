@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -122,6 +124,14 @@ public class TbContractController extends BaseController {
         SysUser loginUser = (SysUser) request.getSession().getAttribute(LoginForm.LOGIN_USER_KEY);
         entity.setInputUser(loginUser.getUserId());
         entity.setInputTime(LocalDateTime.now(ZoneOffset.of("+16")));
+
+        List<TbContract> list = entityService.lambdaQuery().list();
+        LocalDate startDate = entity.getStartDate();
+        LocalDate endDate = entity.getEndDate();
+        if(startDate.compareTo(endDate)>0){
+            throw  new AppServerException("合同开始时间不能晚于合同结束时间");
+        }
+
         entityService.save(entity);
         return ResponseEntity.ok(ApiModel.ok());
     }
@@ -134,6 +144,11 @@ public class TbContractController extends BaseController {
         SysUser loginUser = (SysUser) request.getSession().getAttribute(LoginForm.LOGIN_USER_KEY);
         entity.setInputUser(loginUser.getUserId());
         entity.setUpdateTime(LocalDateTime.now(ZoneOffset.of("+16")));
+        LocalDate startDate = entity.getStartDate();
+        LocalDate endDate = entity.getEndDate();
+        if(startDate.compareTo(endDate)>0){
+            throw  new AppServerException("合同开始时间不能晚于合同结束时间");
+        }
 
         entityService.updateById(entity);
         return ResponseEntity.ok(ApiModel.ok());
