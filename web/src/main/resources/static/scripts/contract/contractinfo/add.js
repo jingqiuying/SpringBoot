@@ -7,9 +7,8 @@ layui.use(['form', 'layer','laydate'], function () {
         elem: '#startDate' //指定元素
     });
     laydate.render({
-        elem: '#endDate' //指定元素
+        elem: '#endDate' ,//指定元素
     });
-
 
     form.on('submit(Add-filter)', function (data) {
         $.ajax({
@@ -35,11 +34,9 @@ layui.use(['form', 'layer','laydate'], function () {
                 }else {
                     layer.msg(e.responseJSON.message, {icon: 2});
                 }
-
             }
 
         });
         return false;
     });
-
 });

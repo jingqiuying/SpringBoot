@@ -104,9 +104,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         }
         if (obj.event == 'export'){
             var eix;
-            var diceName = $("#searchForm").find("input[name='diceName']").val().trim();
-            var diceCodes = formSelects.value("diceCodes-select2", "val");
-            var url = web.rootPath() + 'dataDict/export?dictName=' + diceName + '&diceCodes=' + diceCodes
+          var url = web.rootPath()+'dataDirt/export';
             $.fileDownload(url, {
                 httpMethod: 'POST',
                 prepareCallback: function (url) {

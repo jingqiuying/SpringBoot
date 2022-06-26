@@ -159,17 +159,20 @@ public class TbCustLinkmanController extends BaseController {
         return ResponseEntity.ok(ApiModel.ok());
     }
 
-    @SysLog(value = LogModules.EXPORT, module = LogModule)
+    @SysLog(value = LogModules.EXPORT, module = LogModules.DICT)
     @PostMapping("export")
-//    @PreAuthorize("hasAuthority('user:linkmane:export')")
+//    @PreAuthorize("hasAuthority('linkmane:export')")
     public void export(HttpServletResponse response, String parameterName, String custId) throws IOException {
         //根据条件查询到数据
         List<TbCustLinkman> list = entityService.lambdaQuery()
                 .eq(StringUtils.isNotBlank(custId), TbCustLinkman::getCustId, custId)
-                .and(StringUtils.isNotBlank(parameterName),q ->
-                        q.like(TbCustLinkman::getLinkman, parameterName)
-                                .or()
-                                .like(TbCustLinkman::getPhone, parameterName)
+//                .and(StringUtils.isNotBlank(parameterName),q ->
+//                        q.like(TbCustLinkman::getLinkman, parameterName)
+//                                .or()
+//                                .like(TbCustLinkman::getPhone, parameterName)
+                .like(StringUtils.isNotBlank(parameterName),TbCustLinkman::getLinkman,parameterName)
+                .or()
+                .like(StringUtils.isNotBlank(parameterName),TbCustLinkman::getPhone,parameterName
                 ).list();
         //执行文件导出
         ExportParams exportParams = new ExportParams();

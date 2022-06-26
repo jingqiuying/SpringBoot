@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import link.ahsj.core.annotations.AddGroup;
 import link.ahsj.core.annotations.UpdateGroup;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -39,12 +42,14 @@ public class TbContract implements Serializable {
     /**
      * 合同名称
      */
+    @Length(message = "合同名称超过了100字",max = 100,groups ={AddGroup.class, UpdateGroup.class})
     @NotBlank(message = "合同名称为空",groups ={AddGroup.class, UpdateGroup.class})
     private String contractName;
 
     /**
      * 合同编码
      */
+    @Length(message = "合同编码超过了50字",max = 100,groups ={AddGroup.class, UpdateGroup.class})
     @NotBlank(message = "合同编码为空",groups ={AddGroup.class, UpdateGroup.class})
     private String contractCode;
 
@@ -52,6 +57,7 @@ public class TbContract implements Serializable {
      * 合同金额
      */
     @NotNull(message = "合同金额为空",groups ={AddGroup.class, UpdateGroup.class})
+    @Min(message = "必须填写正数",value = 0,groups ={AddGroup.class, UpdateGroup.class})
     private Integer amounts;
 
     /**

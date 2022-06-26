@@ -122,9 +122,6 @@ public class TbContractController extends BaseController {
         SysUser loginUser = (SysUser) request.getSession().getAttribute(LoginForm.LOGIN_USER_KEY);
         entity.setInputUser(loginUser.getUserId());
         entity.setInputTime(LocalDateTime.now(ZoneOffset.of("+16")));
-
-
-
         entityService.save(entity);
         return ResponseEntity.ok(ApiModel.ok());
     }
