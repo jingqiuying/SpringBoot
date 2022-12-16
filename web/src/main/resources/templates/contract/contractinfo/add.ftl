@@ -77,7 +77,7 @@
                         <label class="layui-form-label">是否盖章确认</label>
                     <div class="layui-input-block">
 <#--                        <input type="text"  name="affixSealStatus"  placeholder="请输入"  autocomplete="off" class="layui-input">-->
-                        <select name="affixSealStatus">
+                        <select name="affixSealStatus" id="affixSealStatus">
                             <option value="0">否</option>
                             <option value="1">是</option>
                         </select>

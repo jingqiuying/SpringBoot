@@ -131,7 +131,6 @@ public class TbContractController extends BaseController {
         if(startDate.compareTo(endDate)>0){
             throw  new AppServerException("合同开始时间不能晚于合同结束时间");
         }
-
         entityService.save(entity);
         return ResponseEntity.ok(ApiModel.ok());
     }

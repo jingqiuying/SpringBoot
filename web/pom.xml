@@ -33,6 +33,7 @@
             <version>${thumbnailator.version}</version>
         </dependency>
         <!--  google 工具包 link-ahsj-generator 使用system作用域时此项需要 -->
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -255,9 +256,10 @@
                         </executions>
                     </plugin>
                     <plugin>
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
-                        <version>3.1.0</version>
+                        <version>3.2.0</version>
                         <configuration>
                             <archive>
                                 <manifest>

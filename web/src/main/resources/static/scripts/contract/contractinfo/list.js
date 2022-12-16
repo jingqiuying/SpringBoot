@@ -40,10 +40,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
                             if (d.auditStatus == '0') {
                                 return "<button class=\"layui-btn layui-btn-normal layui-btn-xs sz-btn-sm\" style='cursor: default'>未审核</button>";
                             } else if (d.auditStatus == '1') {
-                                return "<button class=\"layui-btn layui-btn-danger layui-btn-xs sz-btn-sm\" style='cursor: default'>审核通过</button>";
+                                return "<button class=\"layui-btn layui-btn-warm layui-btn-xs sz-btn-sm\" style='cursor: default'>审核通过</button>";
                             }
                             else if (d.auditStatus == '-1') {
-                                return "<button class=\"layui-btn layui-btn-danger layui-btn-xs sz-btn-sm\" style='cursor: default'>审核不通过</button>";
+                                return "<button class=\"layui-btn layui-btn-disabled layui-btn-xs sz-btn-sm\" style='cursor: default'>审核不通过</button>";
                             }
                         }},
                     {field: 'nullifyStatus', title: '是否作废', minWidth: 100, align: "center", templet: function (d) {

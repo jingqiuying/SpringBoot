@@ -1,7 +1,7 @@
 datasource:
   mysql:
     validation-query: select 1
-    driver: com.mysql.jdbc.Driver
+    driver: com.mysql.cj.jdbc.Driver
     database: web-test
     ip: localhost
     port: 3306
