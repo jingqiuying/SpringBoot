@@ -23,7 +23,7 @@ target/
 .mtj.tmp/
 
 # Package Files #
-*.jar
+Maven*.jar
 *.war
 *.nar
 *.ear
